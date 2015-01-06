@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="utf-8">
+   <link rel="stylesheet" media="screen" href="final.css"/>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+    <script>
+function getArticleInfo(articleID, callback){
+
+ var url = 'https://www.kimonolabs.com/api/3f6brfps?apikey=KUM4jZPQEXMgITOSLLo8tC4l2nGXNTsj&callback=callback&kimpath6'+articleID;
+
+ $.ajax({
+   "url":url,
+   "crossDomain":true,
+   "dataType":"jsonp"
+  });
+}
+
+
+function callback(data) {
+
+    console.log(data)
+    console.log(data.results.collection1[0].title)
+    console.log(data.results.collection2[0].tags)
+    console.log(data.results.collection2[0].tags.text)
+    
+
+    for(var i = 0; i < 3; i++) {
+      var tag = data.results.collection2[i].tags.text;
+      $("#book").append("<h3>"+tag+"</h3>");      
+    }
+}
+
+
+$.getJSON("https://cooper-union-npr-proxy.herokuapp.com/articles", function(response){
+	 var articleI=response.list.story[0].id;
+   var articleII=response.list.story[1].id;
+   var articleIII= response.list.story[2].id;
+   getArticleInfo(articleI, callback);
+   console.log(articleI)
+
+});
+
+
+
+     
+     
+$.getJSON('http://cooper-union-courtlistener.herokuapp.com/?q=taxes', function(response){
+  console.log(response)
+})
+     //how do I put this data into strings//
+     // use tags for things//
+
+    
+   // do something with the data
+   // please make sure the scope of this function is global
+
+
+ 
+
+//var u ='http://cooper-union-courtlistener.herokuapp.com/?q=taxes'
+     //how do I put this data into strings//
+     // use tags for things//
+
+ 
+
+
+
+ </script>
+ <script >
+//        $(document).ready(function () {
+
+// $.getJSON("https://www.kimonolabs.com/api/3f6brfps?apikey=KUM4jZPQEXMgITOSLLo8tC4l2nGXNTsj&kimpath6=368770530&kimpath7=u-s-tech-firms-see-green-as-they-set-up-shop-in-low-tax-ireland", function(response) {
+
+
+// //get first 6 headlines from news/politics/headlines
+// for (i in response){
+// var post=response[i];
+// var tt= post.collection1.title;
+
+
+// //push headlines into boooks
+// if (tt !=null){
+// 	console.log (tt);
+// 	}
+// //get tag associated with headline
+// //use search term from headline to go through free law project  
+// //push content from the free law project to the page
+
+// }
+
+
+
+
+
+
+// });
+
+
+      // });
+    </script>
+  </head>
+  <body>
+<div class="bounding">
+    <div class="back">
+    <div id="book">
+    	<div><h6>Legal Opinions</h6> </div>
+    	
+
+    </div>
+
+    </div>
+
+</div>
+  </body>
+</html>
